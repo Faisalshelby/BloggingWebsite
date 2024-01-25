@@ -5,9 +5,10 @@ const router = express.Router();
 const userDao = require("../modules/users-dao.js");
 const articleDao = require("../modules/articles-dao.js");
 const {createArticle, getUserId} = require("../modules/articles-dao");
+const {loadAvatars} = require("../modules/avatar");
 
 // router.use(function (req,res,next){
-//     res.locals.user = res.session.user || 1;
+//     res.locals.user = res.session.user;
 //     next();
 // });
 
@@ -94,12 +95,19 @@ router.post("/createArticle",async function(req, res){
        }
        console.log(article);
        await createArticle(article);
-       res.render("article");
+       res.redirect("/article");
    }
    else {
        res.redirect("/login?message=ArticleUploadFailed");
    }
 
 });
+
+
+router.get("/article", function (req, res){
+    res.render("article");
+})
+
+
 
 module.exports = router;
