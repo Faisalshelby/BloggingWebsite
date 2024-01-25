@@ -4,6 +4,7 @@ const router = express.Router();
 
 const userDao = require("../modules/users-dao.js");
 const articleDao = require("../modules/articles-dao.js");
+const {createArticle, getUserId} = require("../modules/articles-dao");
 
 // router.use(function (req,res,next){
 //     res.locals.user = res.session.user || 1;
@@ -80,10 +81,25 @@ router.post("/createAccount",async function (req, res) {
 
 
 });
-// router.get("/article",async function (req, res) {
-//
-//
-//
-// });
+router.get("/createArticle",async function (req, res) {
+
+res.render("createArticle");
+
+});
+router.post("/createArticle",async function(req, res){
+   if(req.session.user){
+       let article = {
+           creator_id : user.id,
+           content : req.body.content
+       }
+       console.log(article);
+       await createArticle(article);
+       res.render("article");
+   }
+   else {
+       res.redirect("/login?message=ArticleUploadFailed");
+   }
+
+});
 
 module.exports = router;

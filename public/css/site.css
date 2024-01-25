@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: palegoldenrod;
+    background-color: white;
     color: brown;
 
     align-items: center;
@@ -54,6 +54,13 @@ body {
     border: 1px solid black;
 border-radius: 5px;
 }
+
+.uploadIcon{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
 @media screen and (width < 1000px){
 
     .articleContainer{

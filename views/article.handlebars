@@ -1,10 +1,14 @@
-<div class="container">
+s<div class="container">
 <div class="articleContainer">
-
 {{#if article}}
     {{#each article}}
         <p>{{this.content}}</p>
     {{/each}}
 {{/if}}
 </div>
+</div>
+<div class="uploadIcon">
+    <form method="get" action="/createArticle">
+    <button type="submit"><img src="/images/upload.png"></button>
+    </form>
 </div>
