@@ -1,14 +1,25 @@
-<div class="container">
 <div class="articleContainer">
-{{#if article}}
+{{#if avatar}}
+    <img src="{{avatar}}" alt="avtar">
+{{/if}}
+    {{#if article}}
     {{#each article}}
-        <p>{{this.content}}</p>
-    {{/each}}
+        {{{this.content}}}
+        <div class="commentsContainer">
+            <div class="comments">
+                {{this.comments}}
+                <form method="post" action="/article">
+                    <textarea cols="30" rows="1" name="comments">comments</textarea>
+                    <button type="submit">post comment</button>
+                </form>
+            </div>
+        </div>
+{{/each}}
 {{/if}}
 </div>
 </div>
 <div class="uploadIcon">
-    <form method="get" action="/createArticle">
-    <button type="submit"><img src="/images/upload.png"></button>
-    </form>
-</div>
+<form method="get" action="/createArticle">
+<button type="submit"><img src="/images/upload.png"></button>
+</form>
+

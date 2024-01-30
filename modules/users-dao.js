@@ -6,8 +6,8 @@ const db =await database;
 
 try {
     const result = await db.query(
-        "insert into web_users(firstname, lastname,username, password ) VALUES (?,?,?,?)",
-        [user.firstname,user.lastname,user.username,user.password]);
+        "insert into web_users(firstname, lastname,username, password , avatar) VALUES (?,?,?,?,?)",
+        [user.firstname,user.lastname,user.username,user.password,user.avatar]);
 
     return {
         ...user,

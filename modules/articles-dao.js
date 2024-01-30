@@ -19,7 +19,7 @@ async function createArticle(article){
 async function retrieveAllArticles(){
     const db = await database;
     const articleArray = db.query(
-        "select id , content from web_article order by id"
+        "select id , content from web_article order by id DESC"
     );
     return articleArray;
 }

@@ -5,12 +5,12 @@ const router = express.Router();
 const userDao = require("../modules/users-dao.js");
 const articleDao = require("../modules/articles-dao.js");
 const {createArticle, getUserId} = require("../modules/articles-dao");
-const {loadAvatars} = require("../modules/avatar");
+const avatars = require("../modules/avatar.js");
 
-// router.use(function (req,res,next){
-//     res.locals.user = res.session.user;
-//     next();
-// });
+router.use(function (req,res,next){
+    res.locals.user = req.session.user;
+    next();
+});
 
 router.get("/login",function(req, res){
 
@@ -31,16 +31,16 @@ router.post("/login", async function (req, res) {
     // Get the username and password submitted in the form
     const username = req.body.username;
     const password = req.body.password;
-
     // Find a matching user in the database
     const user = await userDao.retrieveUserWithCredentials(username, password);
-    console.log(user);
+
     // if there is a matching user...
     if (user) {
         // Auth success - add the user to the session, and redirect to the homepage.
         req.session.user = user;
         let article = await articleDao.retrieveAllArticles();
-        res.render("article",{article:article});
+
+        res.render("article",{avatar:user.avatar,article:article});
     }
 
     // Otherwise, if there's no matching user...
@@ -58,16 +58,18 @@ router.get("/logout", function (req, res) {
 });
 
 router.get("/createAccount", function (req,res){
-
-    res.render("./createAccount")
+    // const avatarArray =avatar.getAllAvatars();
+    res.render("home")
 });
 
 router.post("/createAccount",async function (req, res) {
+    console.log('/images/avatars/'+req.body.avatar);
     const user = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        avatar : '/images/avatars/'+req.body.avatar
     }
 
     let new_user = await userDao.createUser(user);
@@ -89,6 +91,7 @@ res.render("createArticle");
 });
 router.post("/createArticle",async function(req, res){
    if(req.session.user){
+       user = req.session.user
        let article = {
            creator_id : user.id,
            content : req.body.content
@@ -104,8 +107,9 @@ router.post("/createArticle",async function(req, res){
 });
 
 
-router.get("/article", function (req, res){
-    res.render("article");
+router.get("/article", async function (req, res) {
+    let article = await articleDao.retrieveAllArticles();
+    res.render("article",{article:article});
 })
 
 
