@@ -1,31 +1,37 @@
 const express = require("express");
 const router = express.Router();
 
-
+//DAO which deals with the users
 const userDao = require("../modules/users-dao.js");
-const articleDao = require("../modules/articles-dao.js");
-const {createArticle, getUserId} = require("../modules/articles-dao");
-const avatars = require("../modules/avatar.js");
 
+
+//Function to
+// Make the user session object available
+// to all handlebars by adding it to res.locals
 router.use(function (req,res,next){
     res.locals.user = req.session.user;
     next();
 });
 
+
+
+//Whenever user navigates to /login, if the user is already login in, redirect to the articles page, else render the login page
 router.get("/login",function(req, res){
 
     if (req.session.user) {
-        res.redirect("/");
+        res.redirect("/article");
     }
 
     else {
         res.locals.message = req.query.message;
         res.render("login");
     }
-     //   res.render("login");
 
 });
 
+
+//whenever user POSTs to /login, check the username and password in the database, if the user and password are correct then redirect the user to the articles page else
+// render the login page with a message that the authentication failed
 router.post("/login", async function (req, res) {
 
     // Get the username and password submitted in the form
@@ -38,9 +44,7 @@ router.post("/login", async function (req, res) {
     if (user) {
         // Auth success - add the user to the session, and redirect to the homepage.
         req.session.user = user;
-        let article = await articleDao.retrieveAllArticles();
-
-        res.render("article",{avatar:user.avatar,article:article});
+        res.redirect("/article");
     }
 
     // Otherwise, if there's no matching user...
@@ -50,6 +54,8 @@ router.post("/login", async function (req, res) {
     }
 });
 
+
+//whenever user presses the logout button, delete the session user and redirect to the login page
 router.get("/logout", function (req, res) {
     if (req.session.user) {
         delete req.session.user;
@@ -57,11 +63,19 @@ router.get("/logout", function (req, res) {
     res.redirect("./login?message=Successfully logged out!");
 });
 
+
+//Whenever the user clicks on the createAccount link, render the home page to enter the values
 router.get("/createAccount", function (req,res){
     // const avatarArray =avatar.getAllAvatars();
     res.render("home")
 });
 
+
+
+//whenever the user posts to the createAccount,
+// create a new user and enter the user credentials in the database and render the login page
+
+//TODO add checks for same username and bcrypt for passwords
 router.post("/createAccount",async function (req, res) {
     console.log('/images/avatars/'+req.body.avatar);
     const user = {
@@ -69,7 +83,7 @@ router.post("/createAccount",async function (req, res) {
         lastname: req.body.lastname,
         username: req.body.username,
         password: req.body.password,
-        avatar : '/images/avatars/'+req.body.avatar
+        avatar : req.body.avatar
     }
 
     let new_user = await userDao.createUser(user);
@@ -79,39 +93,10 @@ router.post("/createAccount",async function (req, res) {
         res.redirect("./login?message=AccountCreatedSuccessfully");
     } else {
         // Failure
-        res.redirect("/createAccount?message=AccountAlreadyExists");
+        res.redirect("/?message=Failed to create Account");
     }
 
-
 });
-router.get("/createArticle",async function (req, res) {
-
-res.render("createArticle");
-
-});
-router.post("/createArticle",async function(req, res){
-   if(req.session.user){
-       user = req.session.user
-       let article = {
-           creator_id : user.id,
-           content : req.body.content
-       }
-       console.log(article);
-       await createArticle(article);
-       res.redirect("/article");
-   }
-   else {
-       res.redirect("/login?message=ArticleUploadFailed");
-   }
-
-});
-
-
-router.get("/article", async function (req, res) {
-    let article = await articleDao.retrieveAllArticles();
-    res.render("article",{article:article});
-})
-
 
 
 module.exports = router;

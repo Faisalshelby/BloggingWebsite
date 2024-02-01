@@ -1,4 +1,5 @@
-const avatarobj = [
+//A list of all available avatar options
+const avatarList = [
     "/images/avatars/avatar1.png",
     "/images/avatars/avatar2.png",
     "/images/avatars/avatar3.png",
@@ -7,8 +8,9 @@ const avatarobj = [
     "/images/avatars/avatar6.png",
 ]
 
+//Function to return the list of all aavatars to be rendered
 function getAllAvatars(){
-    return avatarobj;
+    return avatarList;
 }
 
 module.exports = {getAllAvatars

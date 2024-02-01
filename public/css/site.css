@@ -1,12 +1,19 @@
+/*CSS FOR THE APPLICATION */
+/*The CSS IS ORGANISED ACCORDING TO THE SEQUENCE OF PAGES AND THE DOM OBJECTS
+ FROM TOP TO BOTTOM OF THE PAGE*/
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
-    color: brown;
-
+    background-color: black;
+    color: white;
     align-items: center;
     height: 100vh;
     margin: 0;
 }
+/*CSS for all anchor tags*/
+a{
+    color: white;
+}
+/*Container for forms */
 .container{
     display: flex;
     flex-direction: column;
@@ -14,20 +21,20 @@ body {
     align-items: center;
     margin-top: 50px;
 }
-
+/*Container for Create Account form, or The Home page*/
 .home_container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    border: 1px solid white;
     padding: 20px;
     width: 300px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px;
 }
 
-
+/*Home continer input CSS */
 .home_form input {
     width: 100%;
     padding: 10px;
@@ -36,6 +43,7 @@ body {
     box-sizing: border-box;
 }
 
+/*Code to use Image as the Radio Button to Select avatar */
 [type=radio] {
     position: absolute;
     opacity: 0;
@@ -50,9 +58,11 @@ body {
 
 /* CHECKED STYLES */
 [type=radio]:checked + img {
-    outline: 2px solid #f00;
+    outline: 2px solid white;
 }
 
+
+/*Submit button for the home page and the login page*/
 .home_form button {
     width: 100%;
     padding: 10px;
@@ -61,13 +71,15 @@ body {
     color: white;
     border: none;
     border-radius: 4px;
-    cursor: pointer;;r-radius: 5px;
+    cursor: pointer;
 }
 
+/*CSS For the upload Icon TO upload an new article*/
 .uploadIcon{
     position: fixed;
     bottom: 0;
     right: 0;
+    mix-blend-mode: lighten;
 }
 
 .avatar-container{
@@ -77,14 +89,22 @@ body {
     border-radius: 10px;
     box-shadow: grey;
 }
-
+/*TODO add a drop down menu when the user clicks their avatar on the articles page,
+    it should display a dropdown menu with the options of My profile, edit profile and logout
+    the edit profile page should have a create account like interface,
+    logout should logout the user and render the login page,
+    my profile should show the users personal articles
+    */
 .articleContainer{
     display: flex;
     flex-direction: column;
+    margin: 5px 5px 10px 5px;
     align-items: flex-start;
     justify-content: center;
-   border: 1px solid black;
+   border: 1px solid white;
 }
+/*TODO ADD a box with a like button and number of likes, when the user clicks on the like button
+   the number of likes must increase*/
 
 .commentsContainer{
     display: flex;
@@ -94,9 +114,8 @@ body {
     border: white solid 1px;
     border-radius: 5px;
 }
-.commentsContain:nth-child(n){
-    margin-left: 5px;
-}
+
+/*As the size of the screen goes less than 1000px the page will adjust itself*/
 
 @media screen and (width < 1000px){
 

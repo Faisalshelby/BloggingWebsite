@@ -1,3 +1,5 @@
+//To run the Application
+//Please Enter the Values for the database from the sample env file here
 const mariadb = require("mariadb");
 
 const USER_NAME = "fk204";

@@ -2,6 +2,8 @@
 DROP TABLE IF EXISTS web_comments;
 DROP TABLE IF EXISTS web_article;
 DROP table if exists web_users;
+
+-- Users Table
 create table if not exists web_users(
     id int not null auto_increment,
     firstname text,
@@ -13,7 +15,7 @@ create table if not exists web_users(
     constraint unique_username unique (username)
 );
 
-
+-- Articles Table , TODO Add Likes for articles
 CREATE TABLE IF NOT EXISTS web_article(
     id int not null auto_increment,
     content text,
@@ -21,17 +23,17 @@ CREATE TABLE IF NOT EXISTS web_article(
     primary key (id),
     FOREIGN KEY (creator_id) references web_users(id)
                                       );
-
+-- Comments Table , TODO Comments section reorganise
 CREATE TABLE IF NOT EXISTS web_comments(
-    comment_id int not null auto_increment,
-    comment_content text,
-    user_id int,
-    article_id int,
-    date_time timestamp,
+                                           comment_id int not null auto_increment,
+                                           comment_content text,
+                                           user_id int,
+                                           article_id int,
+                                           date_time timestamp,
+                                           PRIMARY KEY (comment_id),
     FOREIGN KEY (user_id) references web_users(id),
     FOREIGN KEY (article_id) references web_article(id)
 );
-
 
 INSERT INTO web_users(id, firstname, lastname, username, password,avatar) values
                                                                 (1,'user','one','user1','password','/images/avatars/avatar1.png'),
@@ -43,4 +45,6 @@ INSERT INTO web_article(id, content, creator_id) VALUES
                                                      (2,'<p>In iaculis nunc sed augue lacus viverra. Odio ut sem nulla pharetra diam sit amet nisl suscipit. Vitae auctor eu augue ut lectus arcu bibendum at varius. Tincidunt augue interdum velit euismod in. Sed libero enim sed faucibus turpis in eu mi bibendum. Nibh ipsum consequat nisl vel. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mattis molestie a iaculis at erat pellentesque. Quam viverra orci sagittis eu volutpat. Mattis aliquam faucibus purus in massa tempor nec feugiat nisl. Dignissim sodales ut eu sem integer vitae justo eget. Est ante in nibh mauris cursus. Nunc eget lorem dolor sed viverra ipsum nunc aliquet bibendum. Gravida rutrum quisque non tellus. Amet dictum sit amet justo donec enim diam vulputate. Pretium lectus quam id leo. Facilisi etiam dignissim diam quis. Nec tincidunt praesent semper feugiat nibh sed. Leo in vitae turpis massa sed elementum tempus egestas.</p>',3);
 
 
-
+INSERT INTO web_comments (comment_content, user_id, article_id, date_time) VALUES
+                                                                               ('comment 1',2,1,NOW()),
+                                                                                ('comment 2',1,2,NOW());

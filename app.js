@@ -34,6 +34,9 @@ app.use(express.json({}));
 const loginRoutes = require("./routes/login_routes.js");
 app.use(loginRoutes);
 
+const articleRoutes = require("./routes/article_routes.js");
+app.use(articleRoutes);
+
 const appRoutes = require("./routes/application_routes.js");
 app.use(appRoutes);
 

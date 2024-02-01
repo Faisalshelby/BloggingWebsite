@@ -1,13 +1,15 @@
 const express = require("express");
-const {loadAvatars} = require("../modules/avatar");
+const {getAllAvatars} = require("../modules/avatar.js");
 const router = express.Router();
+
+//Renders the homePage
 
 
 router.get("/", async  function(req, res) {
-
-
-    res.render("home");
-
+        const avatars = getAllAvatars();
+    res.render("home",{avatars : avatars});
 });
+
+
 
 module.exports = router;

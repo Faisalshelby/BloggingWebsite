@@ -1,5 +1,7 @@
 const database  = require("./database.js");
 
+
+// Function To create an Article and adding it to the Database
 async function createArticle(article){
     const db = await database;
 
@@ -15,7 +17,7 @@ async function createArticle(article){
 
 }
 
-
+//Function to retrieve All Articles to Display to user
 async function retrieveAllArticles(){
     const db = await database;
     const articleArray = db.query(
@@ -24,11 +26,14 @@ async function retrieveAllArticles(){
     return articleArray;
 }
 
+//Function to delete an article and all the comments on that article
 async function deleteArticle(id){
     const db = await database;
+    await db.query("delete from web_comments where article_id=?",[id]);
     await db.query("delete from web_article where id=?",[id]);
 }
 
+//Function to get the user Id if the user is present in the database
 async function getUserId(username){
     const db = await database;
     const id = await db.query(
@@ -40,10 +45,21 @@ async function getUserId(username){
     }
     return undefined;
 }
+//Function to get all comments on article using the articleId
+//TODO Use a tree Like structure to know the parent comment and the author of that parent comment
+async function retrieveArticleComments(articleId){
+    const db = await database;
+    const comments = await db.query(
+        "select * from web_comments where article_id = ? order by date_time",
+        [articleId]
+    );
+    return comments;
+}
 
 module.exports={
     createArticle,
     retrieveAllArticles,
     deleteArticle,
-    getUserId
+    getUserId,
+    retrieveArticleComments
 };

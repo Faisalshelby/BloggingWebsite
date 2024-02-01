@@ -1,13 +1,22 @@
-<div class="articleContainer">
+<!--TODO
+show some part of article then add
+a button which will redirect to full
+article as well as has the like option and the comment option-->
+
 {{#if avatar}}
     <img src="{{avatar}}" alt="avtar">
 {{/if}}
     {{#if article}}
     {{#each article}}
+        <div class="articleContainer">
         {{{this.content}}}
-        <div class="commentsContainer">
-            <div class="comments">
-                {{this.comments}}
+                {{#if comments}}
+                {{#each comments}}
+                <div class="commentsContainer">
+                    <div class="comments">
+                        <p>{{this.comment_content}}</p>
+                    {{/each}}
+                    {{/if}}
                 <form method="post" action="/article">
                     <textarea cols="30" rows="1" name="comments">comments</textarea>
                     <button type="submit">post comment</button>
@@ -17,9 +26,9 @@
 {{/each}}
 {{/if}}
 </div>
-</div>
+
 <div class="uploadIcon">
 <form method="get" action="/createArticle">
 <button type="submit"><img src="/images/upload.png"></button>
 </form>
-
+</div>
