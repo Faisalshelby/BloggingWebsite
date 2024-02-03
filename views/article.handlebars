@@ -4,7 +4,14 @@ a button which will redirect to full
 article as well as has the like option and the comment option-->
 
 {{#if avatar}}
-    <img src="{{avatar}}" alt="avtar">
+    <button>
+        <img src="{{avatar}}" class="dropbtn">
+    </button>
+    <div class="dropdown-content">
+        <a href="/myProfile">My Profile</a>
+        <a href="/editProfile">Edit Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
 {{/if}}
     {{#if article}}
     {{#each article}}

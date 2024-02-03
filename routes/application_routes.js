@@ -1,7 +1,7 @@
 const express = require("express");
 const {getAllAvatars} = require("../modules/avatar.js");
 const router = express.Router();
-
+const userDao = require("../modules/users-dao")
 //Renders the homePage
 
 

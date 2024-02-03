@@ -98,5 +98,17 @@ router.post("/createAccount",async function (req, res) {
 
 });
 
+router.get("/editProfile",function (req, res){
+
+    res.render("editProfile");
+});
+
+router.get("/myProfile",async function (req, res) {
+
+    const user = req.session.user;
+    const userData = await userDao.getFullUser(user.id);
+    res.render("myProfile",{userData:userData});
+
+});
 
 module.exports = router;

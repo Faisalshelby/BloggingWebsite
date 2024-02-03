@@ -110,6 +110,16 @@ async function passCompare(username,password){
 
 }
 
+async function editProfile(id){
+    const db = await database;
+
+}
+async function getFullUser(id){
+    const db = await database;
+    const user = await db.query("select * from web_users where id = ?",[id]);
+    return user;
+}
+
 
 module.exports = {
     createUser,
@@ -117,7 +127,8 @@ module.exports = {
     retrieveUserWithCredentials,
     retrieveAllUsers,
     updateUser,
-    deleteUser
+    deleteUser,
+    getFullUser
 
 }
 
