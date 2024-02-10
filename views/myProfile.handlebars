@@ -1,5 +1,21 @@
-{{#if userData}}
-    <div class="articleContainer">
-        <img src="{{this.avatar}}">
-    </div>
-{{/if}}
+<div class="articleContainer">
+
+    {{#if userData}}
+        <img src="{{userData.avatar}}">
+        <div class="header"><p>Name :- {{userData.firstname}} {{userData.lastname}}</p></div>
+        <div class="username"><p>Username :- {{userData.username}}</p></div>
+    {{/if}}
+        {{#if userArticles}}
+            <p>Articles :- </p>
+            {{#each userArticles}}
+                <div class="articleContainer" id="{{{this.id}}}">
+                    {{{this.content}}}
+                    <form action="/deleteArticle" method="post">
+                        <button type="submit">
+                            <img src="/images/delete.png" class="delete">
+                        </button>
+                    </form>
+                </div>
+            {{/each}}
+        {{/if}}
+</div>

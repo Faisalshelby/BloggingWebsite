@@ -13,7 +13,7 @@ body {
 a{
     color: white;
 }
-img{
+.dropbtn img{
     border-radius: 50%;
 }
 /*Container for forms */
@@ -82,7 +82,9 @@ img{
     position: fixed;
     bottom: 0;
     right: 0;
-    mix-blend-mode: lighten;
+}
+.uploadIcon:hover{
+    transform: scale(1.1);
 }
 
 .avatar-container{
@@ -105,6 +107,7 @@ img{
     align-items: flex-start;
     justify-content: center;
    border: 1px solid white;
+
 }
 /*TODO ADD a box with a like button and number of likes, when the user clicks on the like button
    the number of likes must increase*/
@@ -155,6 +158,53 @@ img{
     display: block;
     background-color: black;
 }
+
+.likes{
+    margin: 5px;
+}
+.iconContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+.articleButton {
+    width: 100%;
+    text-align: center;
+    color: white;
+    background-color: teal;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+
+.article-load {
+    margin-top: 2em;
+    background-color: white;
+    color: black;
+}
+.article-load:hover{
+    background-color: black;
+    color: white;
+}
+
+.panel {
+    padding: 1em;
+    border: 1px solid white;
+    border-radius: 15px;
+    margin: 0.25em;
+}
+
+.panel > h2 {
+    text-align: center;
+}
+.delete{
+    margin: 5px;
+
+}
+
 /*As the size of the screen goes less than 1000px the page will adjust itself*/
 
 @media screen and (width < 1000px){

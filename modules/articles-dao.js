@@ -56,10 +56,31 @@ async function retrieveArticleComments(articleId){
     return comments;
 }
 
+
+async function createComment(comment){
+    const db = await database;
+    const result = await db.query("insert into web_comments(comment_content,user_id,article_id) values(?,?,?)",
+        [comment.comment,comment.userID,comment.articleId]);
+}
+
+async function getArticleById(articleId){
+ const db = await database;
+ const article = await db.query(
+     "select * from web_article where id = ?",[articleId]
+ )
+    const comment =await db.query(
+        "select comment_id,comment_content from web_comments where article_id=?",[articleId]
+    )
+return [article,comment];
+}
+
+
 module.exports={
     createArticle,
     retrieveAllArticles,
     deleteArticle,
     getUserId,
-    retrieveArticleComments
+    retrieveArticleComments,
+    createComment,
+    getArticleById
 };

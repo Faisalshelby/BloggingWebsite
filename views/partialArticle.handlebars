@@ -1,0 +1,25 @@
+{{#if avatar}}
+    <button>
+        <img src="{{avatar}}" class="dropbtn">
+    </button>
+    <div class="dropdown-content">
+        <a href="/myProfile">My Profile</a>
+        <a href="/editProfile">Edit Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+{{/if}}
+
+<div id="articles" class="panel">
+        <h2>DisBlog</h2>
+
+        <!-- Loaded articles should appear here -->
+        <div id="articles-inner"></div>
+
+
+    </div>
+
+<div class="uploadIcon">
+    <form method="get" action="/createArticle">
+        <button type="submit"><img src="/images/upload.png"></button>
+    </form>
+</div>

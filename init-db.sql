@@ -23,13 +23,13 @@ CREATE TABLE IF NOT EXISTS web_article(
     primary key (id),
     FOREIGN KEY (creator_id) references web_users(id)
                                       );
--- Comments Table , TODO Comments section reorganise
+-- Comments Table ,
 CREATE TABLE IF NOT EXISTS web_comments(
                                            comment_id int not null auto_increment,
                                            comment_content text,
                                            user_id int,
                                            article_id int,
-                                           date_time timestamp,
+                                           date_time timestamp not null default NOW(),
                                            PRIMARY KEY (comment_id),
     FOREIGN KEY (user_id) references web_users(id),
     FOREIGN KEY (article_id) references web_article(id)

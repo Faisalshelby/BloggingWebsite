@@ -66,8 +66,8 @@ async function updateUser(user) {
     const db = await database;
 
     await db.query(
-        "update web_users set username = ?, password = ?, firstname = ?, lastname = ? where id = ?",
-        [user.username, user.password, user.firstname, user.lastname ,user.id]);
+        "update web_users set username = ?, password = ? where id = ?",
+        [user.username, await passWordhash(user.password),user.id]);
 }
 
 //Function to Delete the user from the database, also remove all related comments and article
@@ -110,14 +110,12 @@ async function passCompare(username,password){
 
 }
 
-async function editProfile(id){
-    const db = await database;
 
-}
 async function getFullUser(id){
     const db = await database;
     const user = await db.query("select * from web_users where id = ?",[id]);
-    return user;
+    const userArticle = await db.query("select id,content from web_article where creator_id = ?",[id]);
+    return [user[0],userArticle];
 }
 
 

@@ -44,3 +44,7 @@ app.listen(port, function () {
     console.log(`Web final project listening on http://localhost:${port}/`);
 });
 
+//TODO
+// delete article
+// comments table and likes table
+// show particular article on click

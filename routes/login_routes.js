@@ -3,6 +3,7 @@ const router = express.Router();
 
 //DAO which deals with the users
 const userDao = require("../modules/users-dao.js");
+const {deleteUser} = require("../modules/users-dao");
 
 
 //Function to
@@ -19,7 +20,7 @@ router.use(function (req,res,next){
 router.get("/login",function(req, res){
 
     if (req.session.user) {
-        res.redirect("/article");
+        res.redirect("/partialArticle");
     }
 
     else {
@@ -44,7 +45,7 @@ router.post("/login", async function (req, res) {
     if (user) {
         // Auth success - add the user to the session, and redirect to the homepage.
         req.session.user = user;
-        res.redirect("/article");
+        res.redirect("/partialArticle");
     }
 
     // Otherwise, if there's no matching user...
@@ -107,8 +108,27 @@ router.get("/myProfile",async function (req, res) {
 
     const user = req.session.user;
     const userData = await userDao.getFullUser(user.id);
-    res.render("myProfile",{userData:userData});
+    console.log(userData[1]);
+    res.render("myProfile",{userData:userData[0],userArticles:userData[1]});
 
+});
+
+router.post("/updateUser",async function(req, res){
+    let id = req.session.user
+    let user = {
+        id: id.id,
+        username: req.body.username,
+        password: req.body.password
+    }
+    await userDao.updateUser(user);
+    res.redirect("/myProfile");
+});
+
+router.post("/deleteUser",async function(req, res){
+   let user = req.session.user;
+
+   await deleteUser(user.id);
+    res.redirect("/createAccount?message=AccountDeletedSucessfully");
 });
 
 module.exports = router;
