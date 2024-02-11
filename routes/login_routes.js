@@ -45,7 +45,7 @@ router.post("/login", async function (req, res) {
     if (user) {
         // Auth success - add the user to the session, and redirect to the homepage.
         req.session.user = user;
-        res.redirect("/partialArticle");
+        res.redirect("/article");
     }
 
     // Otherwise, if there's no matching user...
@@ -108,7 +108,7 @@ router.get("/myProfile",async function (req, res) {
 
     const user = req.session.user;
     const userData = await userDao.getFullUser(user.id);
-    console.log(userData[1]);
+    //console.log(userData[1]);
     res.render("myProfile",{userData:userData[0],userArticles:userData[1]});
 
 });

@@ -1,3 +1,13 @@
+{{#if userData}}
+    <button>
+        <img src="{{userData.avatar}}" class="dropbtn">
+    </button>
+    <div class="dropdown-content">
+        <a href="/article">Home</a>
+        <a href="/editProfile">Edit Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+{{/if}}
 <div class="articleContainer">
 
     {{#if userData}}
@@ -8,11 +18,12 @@
         {{#if userArticles}}
             <p>Articles :- </p>
             {{#each userArticles}}
-                <div class="articleContainer" id="{{{this.id}}}">
+                <div class="articleContainer">
                     {{{this.content}}}
                     <form action="/deleteArticle" method="post">
-                        <button type="submit">
-                            <img src="/images/delete.png" class="delete">
+                        <input type="hidden" value="{{this.id}}" name="articleId">
+                        <button type="submit" class="delete">
+                            <img src="/images/delete.png">
                         </button>
                     </form>
                 </div>

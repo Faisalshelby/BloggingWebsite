@@ -1,4 +1,5 @@
 const database  = require("./database.js");
+const {data} = require("express-session/session/cookie");
 
 
 // Function To create an Article and adding it to the Database
@@ -59,21 +60,29 @@ async function retrieveArticleComments(articleId){
 
 async function createComment(comment){
     const db = await database;
-    const result = await db.query("insert into web_comments(comment_content,user_id,article_id) values(?,?,?)",
-        [comment.comment,comment.userID,comment.articleId]);
+    const result = await db.query("insert into web_comments(comment_content,user_id,article_id,parent_id) values(?,?,?,?)",
+        [comment.comment,comment.userID,comment.articleId,comment.parentId]);
 }
 
 async function getArticleById(articleId){
  const db = await database;
  const article = await db.query(
      "select * from web_article where id = ?",[articleId]
- )
+ );
     const comment =await db.query(
         "select comment_id,comment_content from web_comments where article_id=?",[articleId]
-    )
-return [article,comment];
+    );
+    const likes = await db.query(
+        "select SUM(likes) as likes from web_likes where article_id = ?",[articleId]
+    );
+return [article,comment,likes];
 }
 
+async function insertLikes(likes){
+    const db = await database;
+    db.query("insert into web_likes(likes, user_id, article_id) VALUES (?,?,?)",
+        [likes.like,likes.userid,likes.articleid]);
+}
 
 module.exports={
     createArticle,
@@ -82,5 +91,6 @@ module.exports={
     getUserId,
     retrieveArticleComments,
     createComment,
-    getArticleById
+    getArticleById,
+    insertLikes,
 };

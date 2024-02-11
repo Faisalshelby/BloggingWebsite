@@ -1,4 +1,5 @@
 -- Your database initialisation SQL here
+DROP TABLE IF EXISTS web_likes;
 DROP TABLE IF EXISTS web_comments;
 DROP TABLE IF EXISTS web_article;
 DROP table if exists web_users;
@@ -26,11 +27,20 @@ CREATE TABLE IF NOT EXISTS web_article(
 -- Comments Table ,
 CREATE TABLE IF NOT EXISTS web_comments(
                                            comment_id int not null auto_increment,
+                                           parent_id int,
                                            comment_content text,
                                            user_id int,
                                            article_id int,
                                            date_time timestamp not null default NOW(),
                                            PRIMARY KEY (comment_id),
+    FOREIGN KEY (user_id) references web_users(id),
+    FOREIGN KEY (article_id) references web_article(id)
+);
+
+CREATE TABLE IF NOT EXISTS web_likes(
+    likes int default 0,
+    user_id int,
+    article_id int,
     FOREIGN KEY (user_id) references web_users(id),
     FOREIGN KEY (article_id) references web_article(id)
 );
@@ -48,3 +58,4 @@ INSERT INTO web_article(id, content, creator_id) VALUES
 INSERT INTO web_comments (comment_content, user_id, article_id, date_time) VALUES
                                                                                ('comment 1',2,1,NOW()),
                                                                                 ('comment 2',1,2,NOW());
+INSERT INTO web_likes(likes, user_id, article_id) VALUES (1,1,1);

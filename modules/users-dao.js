@@ -114,7 +114,7 @@ async function passCompare(username,password){
 async function getFullUser(id){
     const db = await database;
     const user = await db.query("select * from web_users where id = ?",[id]);
-    const userArticle = await db.query("select id,content from web_article where creator_id = ?",[id]);
+    const userArticle = await db.query("select id,content from web_article where creator_id = ? order by id DESC",[id]);
     return [user[0],userArticle];
 }
 

@@ -115,7 +115,7 @@ a{
 .commentsContainer{
     display: flex;
     margin-left: 5px;
-    margin-top: 1px;
+    margin-top: 5px;
     width: 300px;
     border: white solid 1px;
     border-radius: 5px;
@@ -204,7 +204,12 @@ a{
     margin: 5px;
 
 }
-
+.likesCount{
+    border: 1px solid white;
+    margin-right: 5px;
+    width: 50px;
+    text-align: center;
+}
 /*As the size of the screen goes less than 1000px the page will adjust itself*/
 
 @media screen and (width < 1000px){

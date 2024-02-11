@@ -1,8 +1,3 @@
-<!--TODO
-show some part of article then add
-a button which will redirect to full
-article as well as has the like option and the comment option-->
-
 {{#if avatar}}
     <button>
         <img src="{{avatar}}" class="dropbtn">
@@ -16,27 +11,12 @@ article as well as has the like option and the comment option-->
     {{#if article}}
     {{#each article}}
         <div class="articleContainer">
+            <a href="/article/{{this.id}}">
+                <h2>Click to view</h2>
+            </a>
         {{{this.content}}}
-            <div class="iconContainer">
-            <button name="id" value="{{this.id}}"><img src="/images/like.png" class="likes"></button>
-            </div>
-                <form method="post" action="/createComment">
-                    <textarea cols="30" rows="1" name="comments">comments</textarea>
-                    <button type="submit">post comment</button>
-                </form>
-            </div>
-{{/each}}
-{{/if}}
-
-
-{{#if comments}}
-    {{#each comments}}
-        <div class="commentsContainer">
-            <div class="comments">
-                <p>{{this.comment_content}}</p>
-            </div>
         </div>
-    {{/each}}
+{{/each}}
 {{/if}}
 
 <div class="uploadIcon">
