@@ -70,7 +70,7 @@ async function getArticleById(articleId){
      "select * from web_article where id = ?",[articleId]
  );
     const comment =await db.query(
-        "select comment_id,comment_content from web_comments where article_id=?",[articleId]
+        "select comment_id,article_id,parent_id,comment_content from web_comments where article_id=? order by parent_id",[articleId]
     );
     const likes = await db.query(
         "select SUM(likes) as likes from web_likes where article_id = ?",[articleId]

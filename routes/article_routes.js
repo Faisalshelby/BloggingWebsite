@@ -45,8 +45,32 @@ router.get("/article/:id", async (req, res) => {
         // do some error handling
         res.redirect("/article/?message=NoArticleFound");
     }
+    let rows = article[1];
+    for (let j = 0; j < rows.length; j++) {
+        rows[j].comments = undefined;
+    }
 
-    res.render("single_article", {avatar: user.avatar, article: article[0][0], comments: article[1],likes:article[2][0]});
+    let commentArray = [];
+    rows.forEach(r=>{
+        if (r.parent_id === null){
+            commentArray.push(r);
+            return;
+        }
+        for (let i = 0; i < rows.length; i++) {
+            if (rows[i].comment_id === r.parent_id){
+                //console.log(rows[i].id);
+                if (!(rows[i].comments)){
+                    rows[i].comments = [r];
+                   // console.log(rows[i].comments);
+                }
+                else {
+                    rows[i].comments.push(r)
+                }
+            }
+        }
+    });
+    console.log(commentArray);
+    res.render("single_article", {avatar: user.avatar, article: article[0][0], comments: commentArray,likes:article[2][0]});
 
 })
 
@@ -66,8 +90,7 @@ router.post("/createComment",async function(req, res){
         articleId : req.body.articleId,
         parentId: req.body.parentId
     };
-    console.log(insertComment.articleId);
-    console.log(insertComment.parentId);
+
     await articleDao.createComment(insertComment);
     res.redirect("back");
 });

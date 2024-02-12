@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Setup Handlebars
 app.engine("handlebars", handlebars.create({
+    partialsDir:path.join(__dirname,"views","partials"),
     defaultLayout: "main"
 }).engine);
 app.set("view engine", "handlebars");
@@ -45,6 +46,4 @@ app.listen(port, function () {
 });
 
 //TODO
-// delete article
-// comments table and likes table
-// show particular article on click
+// comments

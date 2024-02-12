@@ -1,0 +1,19 @@
+<div class="commentsContainer">
+    <div class="comments">
+        <div comment-id="{{data.comment_id}}">
+            <p>{{data.comment_content}}</p>
+            <form method="post" action="/createComment">
+                <input type="hidden" value="{{data.article_id}}" name="articleId">
+                <input type="hidden" value="{{data.comment_id}}" name="parentId">
+                <textarea cols="30" rows="1" name="comment" placeholder="Reply"></textarea>
+                <button type="submit">post comment</button>
+            {{#if data.comments}}
+                {{#each data.comments}}
+                    {{>comment data = this}}
+                {{/each}}
+            {{/if}}
+        </form>
+
+    </div>
+    </div>
+</div>

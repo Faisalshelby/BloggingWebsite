@@ -22,22 +22,11 @@
                 <img src="/images/like.png" class="likes">
             </button>
             </form>
-
         </div>
-
             {{#if comments}}
                 {{#each comments}}
-                    <div class="commentsContainer">
-                        <div class="comments">
-                            <p>{{this.comment_content}}</p>
-                            <form method="post" action="/createComment">
-                                <input type="hidden" value="{{article.id}}" name="articleId">
-                                <input type="hidden" value="{{this.id}}" name="parentId">
-                                <textarea cols="30" rows="1" name="comment" placeholder="Reply"></textarea>
-                                <button type="submit">post comment</button>
-                            </form>
-                        </div>
-                        </div>
+                    {{>comment data=this}}
+
                     {{/each}}
             {{/if}}
         <div class="commentsContainer">
