@@ -76,7 +76,6 @@ router.get("/createAccount", function (req,res){
 //whenever the user posts to the createAccount,
 // create a new user and enter the user credentials in the database and render the login page
 
-//TODO add checks for same username and bcrypt for passwords
 router.post("/createAccount",async function (req, res) {
     console.log('/images/avatars/'+req.body.avatar);
     const user = {

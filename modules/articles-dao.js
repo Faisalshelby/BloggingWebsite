@@ -47,7 +47,6 @@ async function getUserId(username){
     return undefined;
 }
 //Function to get all comments on article using the articleId
-//TODO Use a tree Like structure to know the parent comment and the author of that parent comment
 async function retrieveArticleComments(articleId){
     const db = await database;
     const comments = await db.query(

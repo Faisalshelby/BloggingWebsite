@@ -16,7 +16,7 @@ create table if not exists web_users(
     constraint unique_username unique (username)
 );
 
--- Articles Table , TODO Add Likes for articles
+-- Articles Table
 CREATE TABLE IF NOT EXISTS web_article(
     id int not null auto_increment,
     content text,

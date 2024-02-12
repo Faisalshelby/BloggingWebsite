@@ -44,6 +44,3 @@ app.use(appRoutes);
 app.listen(port, function () {
     console.log(`Web final project listening on http://localhost:${port}/`);
 });
-
-//TODO
-// comments

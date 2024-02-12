@@ -94,12 +94,7 @@ a{
     border-radius: 10px;
     box-shadow: grey;
 }
-/*TODO add a drop down menu when the user clicks their avatar on the articles page,
-    it should display a dropdown menu with the options of My profile, edit profile and logout
-    the edit profile page should have a create account like interface,
-    logout should logout the user and render the login page,
-    my profile should show the users personal articles
-    */
+
 .articleContainer{
     display: flex;
     flex-direction: column;
@@ -109,8 +104,7 @@ a{
    border: 1px solid white;
 
 }
-/*TODO ADD a box with a like button and number of likes, when the user clicks on the like button
-   the number of likes must increase*/
+
 
 .commentsContainer{
     display: flex;

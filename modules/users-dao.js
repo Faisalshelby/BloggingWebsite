@@ -61,7 +61,6 @@ async function retrieveAllUsers() {
     return db.query("select * from web_users");
 }
 
-//Function to update the user, TODO add the functionality in the users profile view
 async function updateUser(user) {
     const db = await database;
 
@@ -71,7 +70,7 @@ async function updateUser(user) {
 }
 
 //Function to Delete the user from the database, also remove all related comments and article
-//TODO add functionality to the user profile and ask for id and password before deleting
+
 async function deleteUser(id) {
     const db = await database;
     await db.query("delete from web_comments where user_id = ?",[id]);
@@ -93,7 +92,6 @@ async function passWordhash(password){
 async function passCompare(username,password){
     const db = await database;
     const hash = await db.query("select password from web_users where username = ?",[username]);
-    // todo: check 1 row was returned
         const numrows = hash.length;
         if (numrows === 1){
         let result = await bcrypt.compare(password,hash[0].password);
