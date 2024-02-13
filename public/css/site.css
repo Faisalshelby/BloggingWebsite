@@ -9,13 +9,17 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 /*CSS for all anchor tags*/
 a{
     color: white;
 }
+/*CSS for dropdown avatar*/
 .dropbtn img{
     border-radius: 50%;
 }
+
+
 /*Container for forms */
 .container{
     display: flex;
@@ -24,6 +28,7 @@ a{
     align-items: center;
     margin-top: 50px;
 }
+
 /*Container for Create Account form, or The Home page*/
 .home_container {
     display: flex;
@@ -77,16 +82,7 @@ a{
     cursor: pointer;
 }
 
-/*CSS For the upload Icon TO upload an new article*/
-.uploadIcon{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-}
-.uploadIcon:hover{
-    transform: scale(1.1);
-}
-
+/*CSS for avatars */
 .avatar-container{
     display: flex;
     flex-direction: column;
@@ -95,26 +91,7 @@ a{
     box-shadow: grey;
 }
 
-.articleContainer{
-    display: flex;
-    flex-direction: column;
-    margin: 5px 5px 10px 5px;
-    align-items: flex-start;
-    justify-content: center;
-   border: 1px solid white;
-
-}
-
-
-.commentsContainer{
-    display: flex;
-    margin-left: 5px;
-    margin-top: 5px;
-    width: 300px;
-    border: white solid 1px;
-    border-radius: 5px;
-}
-
+/*CSS for dropdown*/
 .dropbtn {
     border: none;
     cursor: pointer;
@@ -147,15 +124,48 @@ a{
     background-color: white;
     color: black;
 }
-
+/*CSS class to show dropdown*/
 .show {
     display: block;
     background-color: black;
 }
 
+/*CSS for article Containers div*/
+.articleContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 5px 5px 10px 5px;
+    align-items: flex-start;
+    justify-content: center;
+    border: 1px solid white;
+
+}
+
+/*CSS For the upload Icon TO upload an new article*/
+.uploadIcon{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+.uploadIcon:hover{
+    transform: scale(1.1);
+}
+
+/*CSS for Comments*/
+.commentsContainer{
+    display: flex;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 300px;
+    border-left: white solid 1px;
+    border-radius: 5px;
+}
+
+/*CSS for likesBox*/
 .likes{
     margin: 5px;
 }
+
 .iconContainer{
     display: flex;
     flex-direction: row;
@@ -163,41 +173,14 @@ a{
     justify-content: center;
     margin: 5px;
 }
-.articleButton {
-    width: 100%;
-    text-align: center;
-    color: white;
-    background-color: teal;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding-top: 0.25em;
-    padding-bottom: 0.25em;
-}
 
-.article-load {
-    margin-top: 2em;
-    background-color: white;
-    color: black;
-}
-.article-load:hover{
-    background-color: black;
-    color: white;
-}
 
-.panel {
-    padding: 1em;
-    border: 1px solid white;
-    border-radius: 15px;
-    margin: 0.25em;
-}
-
-.panel > h2 {
-    text-align: center;
-}
+/*CSS for Delete button*/
 .delete{
     margin: 5px;
-
 }
+
+/*CSS for Likes button*/
 .likesCount{
     border: 1px solid white;
     margin-right: 5px;
@@ -212,5 +195,12 @@ a{
         flex-direction: column;
         margin: 5px 10px 5px 10px;
     }
-
+    .commentsContainer{
+        flex-direction: column;
+        margin: 5px 10px 5px 10px;
+    }
+.container{
+    flex-direction: column;
+    margin: 5px 10px 5px 10px;
+}
 }

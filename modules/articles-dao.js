@@ -1,3 +1,7 @@
+/**
+ * The articles dao file contains functions for creating, manipulating, deleting new articles into the database
+ * **/
+
 const database  = require("./database.js");
 const {data} = require("express-session/session/cookie");
 
@@ -30,39 +34,19 @@ async function retrieveAllArticles(){
 //Function to delete an article and all the comments on that article
 async function deleteArticle(id){
     const db = await database;
+    await db.query("delete from web_likes where article_id=?",[id])
     await db.query("delete from web_comments where article_id=?",[id]);
     await db.query("delete from web_article where id=?",[id]);
 }
 
-//Function to get the user Id if the user is present in the database
-async function getUserId(username){
-    const db = await database;
-    const id = await db.query(
-        "select id from web_users where username = ?",
-        [username]
-    );
-    if (id && id.length > 0){
-        return id[0].id;
-    }
-    return undefined;
-}
-//Function to get all comments on article using the articleId
-async function retrieveArticleComments(articleId){
-    const db = await database;
-    const comments = await db.query(
-        "select * from web_comments where article_id = ? order by date_time",
-        [articleId]
-    );
-    return comments;
-}
-
-
+//Function to create a comment and insert into the comments table
 async function createComment(comment){
     const db = await database;
     const result = await db.query("insert into web_comments(comment_content,user_id,article_id,parent_id) values(?,?,?,?)",
         [comment.comment,comment.userID,comment.articleId,comment.parentId]);
 }
 
+//Function to get a specific article By id
 async function getArticleById(articleId){
  const db = await database;
  const article = await db.query(
@@ -77,6 +61,7 @@ async function getArticleById(articleId){
 return [article,comment,likes];
 }
 
+//Function to insert likes to a particular article
 async function insertLikes(likes){
     const db = await database;
     db.query("insert into web_likes(likes, user_id, article_id) VALUES (?,?,?)",
@@ -87,8 +72,6 @@ module.exports={
     createArticle,
     retrieveAllArticles,
     deleteArticle,
-    getUserId,
-    retrieveArticleComments,
     createComment,
     getArticleById,
     insertLikes,

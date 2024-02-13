@@ -7,12 +7,13 @@
                 <input type="hidden" value="{{data.comment_id}}" name="parentId">
                 <textarea cols="30" rows="1" name="comment" placeholder="Reply"></textarea>
                 <button type="submit">post comment</button>
+            </form>
+
             {{#if data.comments}}
                 {{#each data.comments}}
-                    {{>comment data = this}}
+                    {{>comment data=this}}
                 {{/each}}
             {{/if}}
-        </form>
 
     </div>
     </div>

@@ -98,11 +98,13 @@ router.post("/createAccount",async function (req, res) {
 
 });
 
+//When the user clicks on edit profile display the edit profile view
 router.get("/editProfile",function (req, res){
 
     res.render("editProfile");
 });
 
+//Whenever user clicks on myprofile, display the users profile with all articles
 router.get("/myProfile",async function (req, res) {
 
     const user = req.session.user;
@@ -112,6 +114,7 @@ router.get("/myProfile",async function (req, res) {
 
 });
 
+//when user posts on edit profile, update the user data in the database and render the updated profile
 router.post("/updateUser",async function(req, res){
     let id = req.session.user
     let user = {
@@ -123,6 +126,7 @@ router.post("/updateUser",async function(req, res){
     res.redirect("/myProfile");
 });
 
+//when user deletes the account, remove all articles, likes, comments from thr database and render the create account page
 router.post("/deleteUser",async function(req, res){
    let user = req.session.user;
 

@@ -1,3 +1,5 @@
+/**The user Dao file is for the creation, read, manipulate and delete user accounts   **/
+
 //Connection to database
 const database = require("./database");
 
@@ -28,18 +30,7 @@ async function createUser(user){
 
 }
 
-// Function to retrieve the user by Id
-async function retrieveUserById(id) {
-    const db = await database;
-
-    const user = await db.query(
-        "select * from web_users where id = ?",
-        [id]);
-
-    return await user[0];
-}
-
-//Function to retrieve the user with the username and password
+//Function to retrieve the user with the @params username and password
 async function retrieveUserWithCredentials(username, password) {
     const db = await database;
     const valid = await passCompare(username,password);
@@ -54,13 +45,7 @@ async function retrieveUserWithCredentials(username, password) {
     }
 }
 
-//Function to retrieve all users
-async function retrieveAllUsers() {
-    const db = await database;
-
-    return db.query("select * from web_users");
-}
-
+//Allows the user to change their username and password
 async function updateUser(user) {
     const db = await database;
 
@@ -69,15 +54,24 @@ async function updateUser(user) {
         [user.username, await passWordhash(user.password),user.id]);
 }
 
-//Function to Delete the user from the database, also remove all related comments and article
 
+//Function to Delete the user from the database, also removes all related likes,comments and article
 async function deleteUser(id) {
     const db = await database;
+    await db.query("delete from web_likes where user_id = ?",[id])
     await db.query("delete from web_comments where user_id = ?",[id]);
     await db.query("delete from web_article where creator_id=?",[id]);
     await db.query("delete from web_users where id = ?", [id]);
 }
 
+
+//Retrieves the user Data, Avatar, Articles
+async function getFullUser(id){
+    const db = await database;
+    const user = await db.query("select * from web_users where id = ?",[id]);
+    const userArticle = await db.query("select id,content from web_article where creator_id = ? order by id DESC",[id]);
+    return [user[0],userArticle];
+}
 
 
 //The function takes the password that the user sets during account creation, hashes it and saves the result in the database
@@ -109,19 +103,9 @@ async function passCompare(username,password){
 }
 
 
-async function getFullUser(id){
-    const db = await database;
-    const user = await db.query("select * from web_users where id = ?",[id]);
-    const userArticle = await db.query("select id,content from web_article where creator_id = ? order by id DESC",[id]);
-    return [user[0],userArticle];
-}
-
-
 module.exports = {
     createUser,
-    retrieveUserById,
     retrieveUserWithCredentials,
-    retrieveAllUsers,
     updateUser,
     deleteUser,
     getFullUser

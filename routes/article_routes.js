@@ -32,6 +32,7 @@ router.post("/createArticle",async function(req, res){
 
 });
 
+/**Function to display specific article, with all the comments and likes, **/
 router.get("/article/:id", async (req, res) => {
     let aid = req.params.id;
     let user = req.session.user
@@ -69,12 +70,11 @@ router.get("/article/:id", async (req, res) => {
             }
         }
     });
-    console.log(commentArray);
     res.render("single_article", {avatar: user.avatar, article: article[0][0], comments: commentArray,likes:article[2][0]});
 
 })
 
-//Whenever the user navigates to /article, show all articles along with comments
+//Whenever the user navigates to /article, show partial articles, to comment user must click on the click to view statement
 router.get("/article", async function (req, res) {
     let user = req.session.user
     let article = await articleDao.retrieveAllArticles();
@@ -82,6 +82,7 @@ router.get("/article", async function (req, res) {
     res.render("article",{avatar:user.avatar,article:article});
 });
 
+//whenever user posts to createComment, create the comment and insert it into article and display the article with comments
 router.post("/createComment",async function(req, res){
     let user = req.session.user;
     const insertComment = {
@@ -103,7 +104,7 @@ router.post("/article", async function(req, res){
         res.render("article",{avatar : user.avatar,article:article})
 });
 
-
+//whenever user posts to delete article, remove the article and all its comments from the database, and render the user profile
 router.post("/deleteArticle", async function(req, res){
 
     let articleId = req.body.articleId;
@@ -111,6 +112,7 @@ router.post("/deleteArticle", async function(req, res){
     res.redirect("/myProfile");
 });
 
+//When user clicks the like button, insert the like in the likes table and render the article page with likes
 router.post("/likeArticle",async function(req, res){
    let user = req.session.user
     const likes ={
