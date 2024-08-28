@@ -1,0 +1,21 @@
+<div class="container">
+<div class="home_container">
+    <h1>DisBlog</h1>
+    <form class="home_form" action="/createAccount" method="post">
+        <input type="text" name="firstname" placeholder="First Name" required>
+        <input type="text" name="lastname" placeholder="Last Name" required>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        {{#if avatars}}
+            {{#each avatars}}
+                <label>
+                    <input type="radio" name="avatar" id="avatar" value="{{this}}">
+                    <img src="{{this}}">
+                </label>
+            {{/each}}
+        {{/if}}
+        <button type="submit">Create Account</button>
+    </form>
+    <p>Already Have an Account, Click <a href="login">Here?</a> to <a href="login">Login</a></p>
+</div>
+</div>

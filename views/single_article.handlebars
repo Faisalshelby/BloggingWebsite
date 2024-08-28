@@ -1,0 +1,43 @@
+{{#if avatar}}
+    <button>
+        <img src="{{avatar}}" class="dropbtn">
+    </button>
+    <div class="dropdown-content">
+        <a href="/myProfile">My Profile</a>
+        <a href="/editProfile">Edit Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+{{/if}}
+{{#if article}}
+    <div class="articleContainer">
+        {{{article.content}}}
+        <div class="iconContainer">
+            {{#if likes}}
+                <div class="likesCount"><p>{{likes.likes}}</p></div>
+            {{/if}}
+            <form method="post" action="/likeArticle">
+                <input type="hidden" value="{{article.id}}" name="articleid">
+                <input type="hidden" value="1" name="like">
+                <button type="submit">
+                <img src="/images/like.png" class="likes">
+            </button>
+            </form>
+        </div>
+            {{#if comments}}
+                {{#each comments}}
+                    {{>comment data=this}}
+
+                    {{/each}}
+            {{/if}}
+        <div class="commentsContainer">
+        <form method="post" action="/createComment">
+            <input type="hidden" value="{{article.id}}" name="articleId">
+            <textarea cols="30" rows="1" name="comment" placeholder="Type Here"></textarea>
+            <button type="submit">post comment</button>
+        </form>
+        </div>
+    </div>
+    </div>
+{{/if}}
+
+

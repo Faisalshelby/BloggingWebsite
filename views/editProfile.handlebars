@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="home_container">
+        <h1>DisBlog</h1>
+        <form class="home_form" action="/updateUser" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            {{#if avatars}}
+                {{#each avatars}}
+                    <label>
+                        <input type="radio" name="avatar" id="avatar" value="{{this}}">
+                        <img src="{{this}}">
+                    </label>
+                {{/each}}
+            {{/if}}
+            <button type="submit">Update</button>
+
+        </form>
+    </div>
+    <form action="/deleteUser" method="post">
+        <p>Click Here to delete Your Account</p>
+        <button type="submit">
+            <img src="/images/delete.png" class="delete">
+        </button>
+    </form>
+</div>

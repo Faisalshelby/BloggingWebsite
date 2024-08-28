@@ -1,0 +1,32 @@
+{{#if userData}}
+    <button>
+        <img src="{{userData.avatar}}" class="dropbtn">
+    </button>
+    <div class="dropdown-content">
+        <a href="/article">Home</a>
+        <a href="/editProfile">Edit Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+{{/if}}
+<div class="articleContainer">
+
+    {{#if userData}}
+        <img src="{{userData.avatar}}">
+        <div class="header"><p>Name :- {{userData.firstname}} {{userData.lastname}}</p></div>
+        <div class="username"><p>Username :- {{userData.username}}</p></div>
+    {{/if}}
+        {{#if userArticles}}
+            <p>Articles :- </p>
+            {{#each userArticles}}
+                <div class="articleContainer">
+                    {{{this.content}}}
+                    <form action="/deleteArticle" method="post">
+                        <input type="hidden" value="{{this.id}}" name="articleId">
+                        <button type="submit" class="delete">
+                            <img src="/images/delete.png">
+                        </button>
+                    </form>
+                </div>
+            {{/each}}
+        {{/if}}
+</div>

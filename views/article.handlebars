@@ -1,0 +1,26 @@
+{{#if avatar}}
+    <button>
+        <img src="{{avatar}}" class="dropbtn">
+    </button>
+    <div class="dropdown-content">
+        <a href="/myProfile">My Profile</a>
+        <a href="/editProfile">Edit Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+{{/if}}
+    {{#if article}}
+    {{#each article}}
+        <div class="articleContainer">
+            <a href="/article/{{this.id}}">
+                <h2>Click to view</h2>
+            </a>
+        {{{this.content}}}
+        </div>
+{{/each}}
+{{/if}}
+
+<div class="uploadIcon">
+<form method="get" action="/createArticle">
+<button type="submit"><img src="/images/upload.png"></button>
+</form>
+</div>
