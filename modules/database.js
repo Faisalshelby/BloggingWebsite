@@ -2,8 +2,8 @@
 //Please Enter the Values for the database from the sample env file here
 const mariadb = require("mariadb");
 
-const USER_NAME = "fk204";
-const USER_PASS = "1636207";
+const USER_NAME = "";
+const USER_PASS = "";
 
 const database = mariadb.createConnection({
     host : 'db.trex-sandwich.com',
