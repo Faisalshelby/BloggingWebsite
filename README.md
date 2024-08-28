@@ -6,4 +6,4 @@ CSS
 Javescript
 Handlebars
 Node.js
-MySQL
+MariaDb
