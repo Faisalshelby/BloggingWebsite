@@ -157,3 +157,7 @@ Your git repository will serve as the submission for your project source code. E
 Ensure that the provided [`db-init.sql`](./db-init.sql) file contains the necessary SQL statements to recreate and initialise your database manually if required.
 
 If any special setup instructions are required, please document these in the provided [`SETUP.md`](./SETUP.md) file.
+=======
+# BloggingWebsite
+This project was part of COMPX569
+>>>>>>> 2b82059c318629b1c1138f96f99cf07b7d7884c8
